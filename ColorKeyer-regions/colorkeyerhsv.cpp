@@ -36,6 +36,7 @@ Mat ColorKeyerHSV::process(const Mat &input){
         binaryMask = maskSmallRegions(binaryMask);
     }
 
+
     // calculate center of mass
     centerOfMass(binaryMask);
 
@@ -44,9 +45,10 @@ Mat ColorKeyerHSV::process(const Mat &input){
     cvtColor(binaryMask, output, CV_GRAY2BGR);
     drawCross(output, center, 30, Scalar(0, 255, 0));
 
-    qDebug() << "center: " << center.y;
+    qDebug() << "counter: " << checkPushupCounter(output, center);
 
     drawLines(output,Scalar(0,255,0));
+
     return output;
 }
 Mat ColorKeyerHSV::colorKeying(Mat& hsvFrame){
@@ -137,6 +139,20 @@ void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color
         line(image, center-Point(0, length), center+Point(0,length), color, 10);
         line(image, center-Point(length, 0), center+Point(length, 0), color, 10);
     }
+}
+
+int ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
+   if(center.y < image.rows/10*4){
+       start = true;
+       if(wasDown){
+           pushups = pushups + 1;
+           wasDown= false;
+       }
+   }
+   if(start && center.y > image.rows/10*8){
+       wasDown = true;
+   }
+   return pushups;
 }
 
 void ColorKeyerHSV::drawLines(Mat& image, Scalar color){
