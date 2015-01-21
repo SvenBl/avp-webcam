@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VideoPlayer</class>
+ <widget class="QMainWindow" name="VideoPlayer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>639</width>
+    <height>483</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>VideoPlayer</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="VideoWidget" name="inputFrame">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>261</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="openVideoFileButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>230</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open Video File...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playButton">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>230</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Play</string>
+    </property>
+   </widget>
+   <widget class="VideoWidget" name="processedFrame">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>30</y>
+      <width>261</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QSlider" name="hueSlider">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>240</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="value">
+     <number>350</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>240</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hue</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelHue">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>240</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelHueTolerance">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>280</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="hueTolerance">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>280</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>30</number>
+    </property>
+    <property name="value">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>280</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tolerance</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="saturationSlider">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>320</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="value">
+     <number>207</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>320</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Saturation</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSaturation">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>320</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>360</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Glättung</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="lowpassAlpha">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>360</y>
+      <width>161</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="value">
+     <number>100</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAlpha">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>360</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxMedian">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>400</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Median</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxOpening">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>400</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Opening</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoSxSmallRegions">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>400</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>mask smaller regions</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VideoWidget</class>
+   <extends>QLabel</extends>
+   <header>videowidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>hueSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>443</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>386</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hueTolerance</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>409</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hueTolerance</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>468</x>
+     <y>291</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saturationSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>210</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lowpassAlpha</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>507</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>96</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxMedian</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>367</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxOpening</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>436</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>413</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoSxSmallRegions</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>VideoPlayer</receiver>
+   <slot>updateParameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>528</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>526</x>
+     <y>465</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateParameters()</slot>
+ </slots>
+</ui>
