@@ -54,9 +54,8 @@ void VideoPlayer::updateParameters(){
     ui->labelSaturation->setNum(saturationThreshold);
 
     // alpha
-    float alpha = ui->lowpassAlpha->value();
+    float alpha = 100;
     colorKeyerHSV->setAlpha(alpha/100.f);
-    ui->labelAlpha->setNum(alpha);
 
     // median
     colorKeyerHSV->setMedianEnable(ui->checkBoxMedian->checkState() == Qt::Checked);
