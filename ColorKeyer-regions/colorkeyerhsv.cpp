@@ -42,8 +42,9 @@ Mat ColorKeyerHSV::process(const Mat &input){
     // convert output to 3 channel image
     Mat output;
     cvtColor(binaryMask, output, CV_GRAY2BGR);
-    drawCross(output, center, 5, Scalar(0, 255, 0));
+    drawCross(output, center, 30, Scalar(0, 255, 0));
 
+    qDebug() << "center: " << center.y;
     return output;
 }
 Mat ColorKeyerHSV::colorKeying(Mat& hsvFrame){
@@ -101,7 +102,6 @@ cv::Mat ColorKeyerHSV::maskSmallRegions(cv::Mat& mask){
             maxAreaIndex = i;
         }
     }
-qDebug() << maxAreaIndex << " " << contours.size();
     // erase all smaller regions
     for(int i = 0; i < contours.size(); i++){
         if (i != maxAreaIndex){
@@ -132,22 +132,19 @@ void ColorKeyerHSV::centerOfMass(Mat& image){
 
 void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color){
     if(center.x > 0 && center.y > 0){
-        line(image, center-Point(0, length), center+Point(0,length), color, 1);
-        line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
+        line(image, center-Point(0, length), center+Point(0,length), color, 10);
+        line(image, center-Point(length, 0), center+Point(length, 0), color, 10);
     }
 }
 
 void ColorKeyerHSV::setHueLowerThreshold(int value){
     hueLowerThreshold = value/2;
-    qDebug() << "hueLowerThreshold: " << value;
 }
 void ColorKeyerHSV::setHueUpperThreshold(int value){
     hueUpperThreshold = value/2;
-    qDebug() << "hueUpperThreshold: " << value;
 }
 void ColorKeyerHSV::setSaturationThreshold(int value){
     saturationThreshold = value/2;
-    qDebug() << "saturationThreshold: " << value;
 }
 void ColorKeyerHSV::setAlpha(float alpha){
     this->alpha = alpha;
