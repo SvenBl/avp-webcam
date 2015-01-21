@@ -31,16 +31,6 @@ void VideoPlayer::on_playButton_clicked()
 }
 
 
-void VideoPlayer::on_openVideoFileButton_clicked()
-{
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
-
-    if (!fileName.isEmpty()) {
-        videoThread->openFile(fileName);
-     }
-
-}
-
 void VideoPlayer::updateParameters(){
     // hue thresholds
     int hueValue = ui->hueSlider->value();

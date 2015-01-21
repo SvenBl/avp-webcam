@@ -21,7 +21,6 @@ public:
 private slots:
     void on_playButton_clicked();
 
-    void on_openVideoFileButton_clicked();
 
     void updateParameters();
 
