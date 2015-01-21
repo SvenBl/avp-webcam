@@ -19,6 +19,7 @@ public:
 
 private:
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
+    void drawLines(cv::Mat& mat, cv::Scalar color);
     void centerOfMass(cv::Mat& image);
     cv::Mat maskSmallRegions(cv::Mat& image);
     cv::Mat colorKeying(cv::Mat& hsvFrame);
