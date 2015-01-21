@@ -45,6 +45,8 @@ Mat ColorKeyerHSV::process(const Mat &input){
     drawCross(output, center, 30, Scalar(0, 255, 0));
 
     qDebug() << "center: " << center.y;
+
+    drawLines(output,Scalar(0,255,0));
     return output;
 }
 Mat ColorKeyerHSV::colorKeying(Mat& hsvFrame){
@@ -135,6 +137,11 @@ void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color
         line(image, center-Point(0, length), center+Point(0,length), color, 10);
         line(image, center-Point(length, 0), center+Point(length, 0), color, 10);
     }
+}
+
+void ColorKeyerHSV::drawLines(Mat& image, Scalar color){
+        line(image, Point(0,(image.rows/10*4) ), Point(image.cols,(image.rows/10*4)), color, 10);
+        line(image, Point(0,(image.rows/10*8) ), Point(image.cols,(image.rows/10*8)), color, 10);
 }
 
 void ColorKeyerHSV::setHueLowerThreshold(int value){
