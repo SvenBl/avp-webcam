@@ -8,7 +8,7 @@ QT       += core gui widgets multimedia multimediawidgets
 
 
 
-TARGET = ColorKeyer
+TARGET = HoerDichFit
 TEMPLATE = app
 
 
