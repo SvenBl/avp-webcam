@@ -146,6 +146,7 @@ int ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
        start = true;
        if(wasDown){
            pushups = pushups + 1;
+           emit pushupsChanged(pushups);
            wasDown= false;
        }
    }

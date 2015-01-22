@@ -20,6 +20,7 @@ public:
     void setProcessor(VideoProcessor*);
     const VideoFormat& videoFormat() const;
     int framePosition();
+    VideoProcessor* processor;
 protected:
     void run();
 public slots:
@@ -31,8 +32,7 @@ private:
     cv::VideoCapture videoCapture;
     VideoFormat _videoFormat;
     bool stopped;
-    QMutex mutex;
-    VideoProcessor* processor;
+    QMutex mutex;   
     bool usingCamera;
     int cameraChannel;
 };

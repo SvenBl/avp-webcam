@@ -6,6 +6,7 @@
 #include <QTime>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <videoprocessor>
 
 // http://doc.qt.digia.com/qt-5.2/qtwinextras-musicplayer-musicplayer-cpp.html
 
@@ -27,6 +28,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     videoThread->openCamera(0,0);
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
+    connect(videoThread->processor, SIGNAL(pushupsChanged(int pushups)), ui->label_2 , SLOT(setNum(pushups)));
     updateParameters();
 
     ui->open->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
@@ -45,6 +47,10 @@ VideoPlayer::~VideoPlayer(){
     delete videoThread;
     delete colorKeyerHSV;
     delete ui;
+}
+
+void VideoPlayer::process(const ColorKeyerHSV &colorKeyerHSV){
+    qDebug() << "counter: " << colorKeyerHSV.pushups;
 }
 
 void VideoPlayer::on_start_toggled(bool checked){

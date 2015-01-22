@@ -16,6 +16,7 @@ public:
     void setMedianEnable(bool enable);
     void setOpeningEnable(bool enable);
     void setMaskSmallRegions(bool enable);
+    int pushups = 0;
 
 private:
     int checkPushupCounter(cv::Mat& mat, cv::Point center);
@@ -35,7 +36,8 @@ private:
     bool useMaskSmallRegions;
     bool start;
     bool wasDown;
-    int pushups = 0;
+signals:
+    void pushupsChanged(int pushups);
 };
 
 #endif // COLORKEYERHSV_H
