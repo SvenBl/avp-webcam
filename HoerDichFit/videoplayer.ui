@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>639</width>
-    <height>527</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -234,35 +234,12 @@
      <rect>
       <x>40</x>
       <y>240</y>
-      <width>101</width>
+      <width>141</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Open Audio File</string>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>270</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="start">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>460</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Start</string>
+     <string>Insert Songs</string>
     </property>
    </widget>
    <widget class="QPushButton" name="stop">
@@ -270,12 +247,12 @@
      <rect>
       <x>220</x>
       <y>460</y>
-      <width>75</width>
+      <width>21</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Stop</string>
+     <string/>
     </property>
    </widget>
    <widget class="QSlider" name="volume">
@@ -292,19 +269,6 @@
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pause">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>460</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Pause</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -397,6 +361,64 @@
      </size>
     </property>
     <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="next">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>460</y>
+      <width>21</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="previous">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>460</y>
+      <width>21</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>460</y>
+      <width>51</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>270</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="alternatingRowColors">
      <bool>true</bool>
     </property>
    </widget>

@@ -23,8 +23,7 @@ public:
 
 private slots:
     void on_open_clicked();
-    void on_start_clicked();
-    void on_pause_clicked();
+    void on_start_toggled(bool checked);
     void updateParameters();
     void on_stop_clicked();
     void on_next_clicked();

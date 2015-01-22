@@ -26,6 +26,11 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     updateParameters();
 
+    ui->open->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
+    ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    ui->stop->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
+    ui->next->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
+    ui->previous->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
     ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
 }
@@ -36,11 +41,17 @@ VideoPlayer::~VideoPlayer(){
     delete ui;
 }
 
-void VideoPlayer::on_start_clicked(){
-    if(!mediaPlaylist->isEmpty()){
-        mediaPlayer->play();
+void VideoPlayer::on_start_toggled(bool checked){
+    if (ui->start->isChecked()) {
+        if(!mediaPlaylist->isEmpty()){
+            mediaPlayer->play();
+            ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+        }else {
+            on_open_clicked();
+        }
     }else {
-        on_open_clicked();
+        mediaPlayer->pause();
+        ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     }
 }
 
@@ -99,10 +110,6 @@ void VideoPlayer::on_stop_clicked(){
     mediaPlayer->stop();
 }
 
-void VideoPlayer::on_pause_clicked(){
-    mediaPlayer->pause();
-}
-
 void VideoPlayer::on_volume_valueChanged(int value){
     mediaPlayer->setVolume(value);
     if (value == 0){
@@ -136,12 +143,11 @@ void VideoPlayer::on_muteButton_toggled(bool checked)
 
 void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
 {
-     if (ui->toggleCameraButton->isChecked()){
-        videoThread->restart();
+    if (ui->toggleCameraButton->isChecked()){
         videoThread->start();
-         ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-     }else {
-         videoThread->stop();
-         ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-     }
+        ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+    }else {
+        videoThread->stop();
+        ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    }
 }
