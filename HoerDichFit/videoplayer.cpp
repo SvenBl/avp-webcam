@@ -1,18 +1,18 @@
-#include <QCheckBox>
 #include "videoplayer.h"
 #include "ui_videoplayer.h"
 #include <QFileDialog>
+#include <QCheckBox>
 #include <QDir>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 
+int lastVolume = 0;
 
 VideoPlayer::VideoPlayer(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::VideoPlayer)
     , videoThread(new VideoEngine)
-    , colorKeyerHSV(new ColorKeyerHSV())
-{
+    , colorKeyerHSV(new ColorKeyerHSV()){
 
     mediaPlayer = new QMediaPlayer(this);
     // owned by PlaylistModel
@@ -25,35 +25,41 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     updateParameters();
+
+    ui->recordButton->setEnabled(true);
+    ui->recordButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    ui->videoPauseButton->setEnabled(false);
+    ui->videoPauseButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+    ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
 }
 
-VideoPlayer::~VideoPlayer()
-{
+VideoPlayer::~VideoPlayer(){
     delete videoThread;
     delete colorKeyerHSV;
     delete ui;
 }
 
-
-void VideoPlayer::on_recordButton_clicked()
-{
+void VideoPlayer::on_recordButton_clicked(){
     videoThread->start();
+    ui->recordButton->setEnabled(false);
+    ui->videoPauseButton->setEnabled(true);
 }
-void VideoPlayer::on_videoPauseButton_clicked()
-{
+
+void VideoPlayer::on_videoPauseButton_clicked(){
+    ui->recordButton->setEnabled(false);
+    ui->videoPauseButton->setEnabled(false);
     videoThread->stop();
 }
 
-void VideoPlayer::on_start_clicked()
-{
+void VideoPlayer::on_start_clicked(){
     if(!mediaPlaylist->isEmpty()){
         mediaPlayer->play();
     }else {
         on_open_clicked();
     }
 }
-void VideoPlayer::on_open_clicked()
-{
+
+void VideoPlayer::on_open_clicked(){
     //QString fileName = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
     //mediaPlaylist->addMedia(QUrl::fromLocalFile(fileName));
 
@@ -102,31 +108,43 @@ void VideoPlayer::updateParameters(){
 
     // small regions masking
     colorKeyerHSV->setMaskSmallRegions(ui->checkBoSxSmallRegions->checkState() == Qt::Checked);
-
-
-
 }
 
-void VideoPlayer::on_stop_clicked()
-{
+void VideoPlayer::on_stop_clicked(){
     mediaPlayer->stop();
 }
 
-void VideoPlayer::on_pause_clicked()
-{
+void VideoPlayer::on_pause_clicked(){
     mediaPlayer->pause();
 }
-void VideoPlayer::on_volume_valueChanged(int value)
-{
+
+void VideoPlayer::on_volume_valueChanged(int value){
     mediaPlayer->setVolume(value);
+    if (value == 0){
+        ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolumeMuted));
+    }else {
+        ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
+    }
 }
 
-void VideoPlayer::on_next_clicked()
-{
+void VideoPlayer::on_next_clicked(){
     mediaPlaylist->next();
 }
 
-void VideoPlayer::on_previous_clicked()
-{
+void VideoPlayer::on_previous_clicked(){
     mediaPlaylist->previous();
+}
+
+void VideoPlayer::on_muteButton_toggled(bool checked)
+{
+    if (ui->muteButton->isChecked()){
+        lastVolume = ui->volume->value();
+        ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolumeMuted));
+        mediaPlayer->setVolume(0);
+        ui->volume->setValue(0);
+    }else {
+        ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
+        ui->volume->setValue(lastVolume);
+        mediaPlayer->setVolume(lastVolume);
+    }
 }

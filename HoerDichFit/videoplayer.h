@@ -33,6 +33,8 @@ private slots:
     void on_previous_clicked();
     void on_volume_valueChanged(int value);
 
+    void on_muteButton_toggled(bool checked);
+
 private:
     Ui::VideoPlayer *ui;
     VideoEngine *videoThread;
