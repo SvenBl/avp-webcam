@@ -3,8 +3,11 @@
 #include <QFileDialog>
 #include <QCheckBox>
 #include <QDir>
+#include <QTime>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+
+// http://doc.qt.digia.com/qt-5.2/qtwinextras-musicplayer-musicplayer-cpp.html
 
 int lastVolume = 0;
 
@@ -16,7 +19,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
 
     mediaPlayer = new QMediaPlayer(this);
     // owned by PlaylistModel
-    mediaPlaylist = new QMediaPlaylist();
+    mediaPlaylist = new QMediaPlaylist(mediaPlayer);
     mediaPlayer->setPlaylist(mediaPlaylist);
 
     ui->setupUi(this);
@@ -33,6 +36,9 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     ui->previous->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
     ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
+    connect(ui->positionSlider, SIGNAL(valueChanged(int)), this, SLOT(setPosition(int)));
+    connect(mediaPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(updatePosition(qint64)));
+    connect(mediaPlayer, SIGNAL(durationChanged(qint64)), this, SLOT(updateDuration(qint64)));
 }
 
 VideoPlayer::~VideoPlayer(){
@@ -56,8 +62,7 @@ void VideoPlayer::on_start_toggled(bool checked){
 }
 
 void VideoPlayer::on_open_clicked(){
-    //QString fileName = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
-    //mediaPlaylist->addMedia(QUrl::fromLocalFile(fileName));
+
 
     QStringList fileNames = QFileDialog::getOpenFileNames(this, ("Open Songs"), QDir::homePath());
     foreach (QString argument, fileNames) {
@@ -68,6 +73,7 @@ void VideoPlayer::on_open_clicked(){
         QFileInfo file(argument);
         ui->listWidget->addItem(file.baseName());
     }
+    ui->listWidget->setCurrentRow(mediaPlaylist->currentIndex() != -1? mediaPlaylist->currentIndex():0);
 }
 
 void VideoPlayer::updateParameters(){
@@ -150,4 +156,28 @@ void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
         videoThread->stop();
         ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     }
+}
+
+void VideoPlayer::updatePosition(qint64 position)
+{
+    ui->positionSlider->setValue(position);
+    QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));
+    ui->positionLabel->setText(duration.toString(tr("mm:ss")));
+}
+
+void VideoPlayer::updateDuration(qint64 duration)
+{
+    ui->positionSlider->setRange(0, duration);
+    ui->positionSlider->setEnabled(duration > 0);
+    ui->positionSlider->setPageStep(duration / 10);
+}
+
+void VideoPlayer::setPosition(qint64 position)
+{
+    mediaPlayer->setPosition(position);
+}
+
+void VideoPlayer::on_positionSlider_valueChanged(int value)
+{
+    setPosition(value);
 }

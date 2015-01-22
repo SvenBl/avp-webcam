@@ -31,6 +31,10 @@ private slots:
     void on_volume_valueChanged(int value);
     void on_muteButton_toggled(bool checked);
     void on_toggleCameraButton_toggled(bool checked);
+    void updatePosition(qint64 position);
+    void updateDuration(qint64 duration);
+    void setPosition(qint64 position);
+    void on_positionSlider_valueChanged(int value);
 
 private:
     Ui::VideoPlayer *ui;

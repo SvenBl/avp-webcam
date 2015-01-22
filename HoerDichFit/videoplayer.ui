@@ -297,7 +297,10 @@
      <string/>
     </property>
    </widget>
-   <widget class="QSlider" name="songPositionSlider">
+   <widget class="QSlider" name="positionSlider">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -308,16 +311,6 @@
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QTimeEdit" name="timeEdit">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>490</y>
-      <width>118</width>
-      <height>22</height>
-     </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="muteButton">
@@ -420,6 +413,19 @@
     </property>
     <property name="alternatingRowColors">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="positionLabel">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>490</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
