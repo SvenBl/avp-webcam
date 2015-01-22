@@ -22,18 +22,16 @@ public:
     ~VideoPlayer();
 
 private slots:
-    void on_recordButton_clicked();
     void on_open_clicked();
     void on_start_clicked();
     void on_pause_clicked();
-    void on_videoPauseButton_clicked();
     void updateParameters();
     void on_stop_clicked();
     void on_next_clicked();
     void on_previous_clicked();
     void on_volume_valueChanged(int value);
-
     void on_muteButton_toggled(bool checked);
+    void on_toggleCameraButton_toggled(bool checked);
 
 private:
     Ui::VideoPlayer *ui;

@@ -26,10 +26,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     updateParameters();
 
-    ui->recordButton->setEnabled(true);
-    ui->recordButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    ui->videoPauseButton->setEnabled(false);
-    ui->videoPauseButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+    ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
 }
 
@@ -37,18 +34,6 @@ VideoPlayer::~VideoPlayer(){
     delete videoThread;
     delete colorKeyerHSV;
     delete ui;
-}
-
-void VideoPlayer::on_recordButton_clicked(){
-    videoThread->start();
-    ui->recordButton->setEnabled(false);
-    ui->videoPauseButton->setEnabled(true);
-}
-
-void VideoPlayer::on_videoPauseButton_clicked(){
-    ui->recordButton->setEnabled(false);
-    ui->videoPauseButton->setEnabled(false);
-    videoThread->stop();
 }
 
 void VideoPlayer::on_start_clicked(){
@@ -147,4 +132,16 @@ void VideoPlayer::on_muteButton_toggled(bool checked)
         ui->volume->setValue(lastVolume);
         mediaPlayer->setVolume(lastVolume);
     }
+}
+
+void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
+{
+     if (ui->toggleCameraButton->isChecked()){
+        videoThread->restart();
+        videoThread->start();
+         ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+     }else {
+         videoThread->stop();
+         ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+     }
 }
