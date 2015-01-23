@@ -28,6 +28,7 @@ public slots:
 signals:
     void sendInputImage(const QImage&);
     void sendProcessedImage(const QImage&);
+    void sendCounter(int);
 private:
     cv::VideoCapture videoCapture;
     VideoFormat _videoFormat;

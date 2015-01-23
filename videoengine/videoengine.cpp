@@ -104,6 +104,10 @@ void VideoEngine::run()
 
         emit sendProcessedImage(cvMatToQImage(cvFrame));
 
+        if(processor->getPushups()<= 10){
+            qDebug() << "counter: läuft" << processor->getPushups();
+            emit sendCounter(processor->getPushups());
+        }
         // check if stopped
         QMutexLocker locker(&mutex);
         if (stopped) {

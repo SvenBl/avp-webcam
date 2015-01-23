@@ -17,9 +17,10 @@ public:
     void setOpeningEnable(bool enable);
     void setMaskSmallRegions(bool enable);
     int pushups = 0;
+    int getPushups();
+    void checkPushupCounter(cv::Mat& mat, cv::Point center);
 
-private:
-    int checkPushupCounter(cv::Mat& mat, cv::Point center);
+private:    
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
     void drawLines(cv::Mat& mat, cv::Scalar color);
     void centerOfMass(cv::Mat& image);
@@ -36,8 +37,7 @@ private:
     bool useMaskSmallRegions;
     bool start;
     bool wasDown;
-signals:
-    void pushupsChanged(int pushups);
+
 };
 
 #endif // COLORKEYERHSV_H

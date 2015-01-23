@@ -45,12 +45,17 @@ Mat ColorKeyerHSV::process(const Mat &input){
     cvtColor(binaryMask, output, CV_GRAY2BGR);
     drawCross(output, center, 30, Scalar(0, 255, 0));
 
-    qDebug() << "counter: " << checkPushupCounter(output, center);
-
     drawLines(output,Scalar(0,255,0));
+
+    checkPushupCounter(output, center);
 
     return output;
 }
+
+int ColorKeyerHSV::getPushups(){
+    return pushups;
+}
+
 Mat ColorKeyerHSV::colorKeying(Mat& hsvFrame){
     // initialize Mat object for output
     Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
@@ -141,19 +146,17 @@ void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color
     }
 }
 
-int ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
+void ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
    if(center.y < image.rows/10*4){
        start = true;
        if(wasDown){
            pushups = pushups + 1;
-           emit pushupsChanged(pushups);
            wasDown= false;
        }
    }
    if(start && center.y > image.rows/10*8){
        wasDown = true;
    }
-   return pushups;
 }
 
 void ColorKeyerHSV::drawLines(Mat& image, Scalar color){
