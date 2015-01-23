@@ -48,10 +48,6 @@ VideoPlayer::~VideoPlayer(){
     delete ui;
 }
 
-void VideoPlayer::process(const ColorKeyerHSV &colorKeyerHSV){
-    qDebug() << "counter: " << colorKeyerHSV.pushups;
-}
-
 void VideoPlayer::on_start_toggled(bool checked){
     if (ui->start->isChecked()) {
         if(!mediaPlaylist->isEmpty()){

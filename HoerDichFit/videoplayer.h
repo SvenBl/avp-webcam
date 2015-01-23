@@ -22,7 +22,6 @@ public:
     ~VideoPlayer();
 
 private slots:
-    void process(const ColorKeyerHSV& colorKeyerHSV);
     void on_open_clicked();
     void on_start_toggled(bool checked);
     void updateParameters();
