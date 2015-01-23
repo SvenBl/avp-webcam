@@ -27,7 +27,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     videoThread->openCamera(0,0);
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
-    connect(videoThread, SIGNAL(sendCounter(int pushups)), ui->label_2 , SLOT(setNum(pushups)));
+    connect(videoThread, SIGNAL(sendCounter(int)), ui->counterLabel , SLOT(setNum(int)));
     updateParameters();
 
     ui->open->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
