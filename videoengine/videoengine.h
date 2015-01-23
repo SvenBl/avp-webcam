@@ -21,6 +21,7 @@ public:
     const VideoFormat& videoFormat() const;
     int framePosition();
     VideoProcessor* processor;
+    int pushupsOld = 0;
 protected:
     void run();
 public slots:

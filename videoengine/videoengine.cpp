@@ -104,8 +104,8 @@ void VideoEngine::run()
 
         emit sendProcessedImage(cvMatToQImage(cvFrame));
 
-        if(processor->getPushups()<= 10){
-            qDebug() << "counter: läuft" << processor->getPushups();
+        if(processor->getPushups()> pushupsOld){
+            pushupsOld = processor->getPushups();
             emit sendCounter(processor->getPushups());
         }
         // check if stopped
