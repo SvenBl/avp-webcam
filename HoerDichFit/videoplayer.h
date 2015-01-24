@@ -20,6 +20,7 @@ class VideoPlayer : public QMainWindow
 public:
     explicit VideoPlayer(QWidget *parent = 0);
     ~VideoPlayer();
+    int timer;
 
 private slots:
     void on_open_clicked();
@@ -35,6 +36,8 @@ private slots:
     void updateDuration(qint64 duration);
     void setPosition(qint64 position);
     void on_positionSlider_valueChanged(int value);
+
+    void on_startProgram_clicked();
 
 private:
     Ui::VideoPlayer *ui;

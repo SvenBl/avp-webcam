@@ -4,6 +4,7 @@
 #include <QCheckBox>
 #include <QDir>
 #include <QTime>
+#include <QTimer>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 
@@ -16,6 +17,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     , ui(new Ui::VideoPlayer)
     , videoThread(new VideoEngine)
     , colorKeyerHSV(new ColorKeyerHSV()){
+
 
     mediaPlayer = new QMediaPlayer(this);
     // owned by PlaylistModel
@@ -40,6 +42,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(ui->positionSlider, SIGNAL(valueChanged(int)), this, SLOT(setPosition(int)));
     connect(mediaPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(updatePosition(qint64)));
     connect(mediaPlayer, SIGNAL(durationChanged(qint64)), this, SLOT(updateDuration(qint64)));
+
 }
 
 VideoPlayer::~VideoPlayer(){
@@ -163,6 +166,8 @@ void VideoPlayer::updatePosition(qint64 position)
 {
     ui->positionSlider->setValue(position);
     QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));
+    timer = timer -1;
+    qDebug() << timer;
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 
@@ -181,4 +186,9 @@ void VideoPlayer::setPosition(qint64 position)
 void VideoPlayer::on_positionSlider_valueChanged(int value)
 {
     setPosition(value);
+}
+
+void VideoPlayer::on_startProgram_clicked()
+{
+    timer = ui->spinBox_2->value();
 }
