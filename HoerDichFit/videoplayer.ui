@@ -100,96 +100,6 @@
      <string>0</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelHueTolerance">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>280</y>
-      <width>46</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="hueTolerance">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>280</y>
-      <width>160</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>30</number>
-    </property>
-    <property name="value">
-     <number>3</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>280</y>
-      <width>46</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Tolerance</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="saturationSlider">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>320</y>
-      <width>160</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>255</number>
-    </property>
-    <property name="value">
-     <number>207</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>320</y>
-      <width>46</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Saturation</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelSaturation">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>320</y>
-      <width>46</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="checkBoxMedian">
     <property name="geometry">
      <rect>
@@ -317,28 +227,6 @@
     </property>
     <property name="default">
      <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="toggleCameraButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>200</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>24</width>
-      <height>24</height>
-     </size>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="next">
@@ -560,54 +448,6 @@
     <hint type="destinationlabel">
      <x>191</x>
      <y>386</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hueTolerance</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>VideoPlayer</receiver>
-   <slot>updateParameters()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>494</x>
-     <y>296</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>274</x>
-     <y>409</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hueTolerance</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>VideoPlayer</receiver>
-   <slot>updateParameters()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>468</x>
-     <y>291</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>339</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>saturationSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>VideoPlayer</receiver>
-   <slot>updateParameters()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>481</x>
-     <y>333</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>210</x>
-     <y>310</y>
     </hint>
    </hints>
   </connection>

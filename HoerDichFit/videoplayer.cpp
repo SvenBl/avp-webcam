@@ -26,11 +26,12 @@ VideoPlayer::VideoPlayer(QWidget *parent)
 
     ui->setupUi(this);
     videoThread->setProcessor(colorKeyerHSV);
-    videoThread->openCamera(0,0);
+    videoThread->openCamera(0,0);  
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendCounter(int)), ui->counterLabel , SLOT(setNum(int)));
     connect(videoThread, SIGNAL(sendCounter(int)), this , SLOT(updateCalc(int)));
+
     updateParameters();
 
     ui->open->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
@@ -38,10 +39,9 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     ui->stop->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     ui->next->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
     ui->previous->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
-    ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
     connect(mediaPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(updatePosition(qint64)));
-
+    videoThread->start();
 }
 
 VideoPlayer::~VideoPlayer(){
@@ -82,7 +82,7 @@ void VideoPlayer::on_open_clicked(){
 void VideoPlayer::updateParameters(){
     // hue thresholds
     int hueValue = ui->hueSlider->value();
-    int hueTolerance = ui->hueTolerance->value();
+    int hueTolerance = 30;
     int hueLowerThreshold = hueValue - hueTolerance;
     if (hueLowerThreshold < 0){
         hueLowerThreshold += 360;
@@ -94,12 +94,10 @@ void VideoPlayer::updateParameters(){
     colorKeyerHSV->setHueLowerThreshold(hueLowerThreshold);
     colorKeyerHSV->setHueUpperThreshold(hueUpperThreshold);
     ui->labelHue->setNum(hueValue);
-    ui->labelHueTolerance->setNum(hueTolerance);
 
     // saturation thresholds
-    int saturationThreshold = ui->saturationSlider->value();
+    int saturationThreshold = 207;
     colorKeyerHSV->setSaturationThreshold(saturationThreshold);
-    ui->labelSaturation->setNum(saturationThreshold);
 
     // alpha
     float alpha = 100;
@@ -150,21 +148,11 @@ void VideoPlayer::on_muteButton_toggled(bool checked)
     }
 }
 
-void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
-{
-    if (ui->toggleCameraButton->isChecked()){
-        videoThread->start();
-        ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-    }else {
-        videoThread->stop();
-        ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    }
-}
 
 void VideoPlayer::updateCalc(int pushups)
 {
     timer = timer + 10;
-    qDebug() << "test";
+    qDebug() << timer;
 }
 
 void VideoPlayer::updatePosition(qint64 position)
@@ -179,11 +167,11 @@ void VideoPlayer::updatePosition(qint64 position)
         currentSecond = duration.second();
         ui->remainingTimeLabel->setNum(timer);
     }
-    if (timer < 1){
+    /*if (timer < 1){
         mediaPlayer->pause();
     }else {
         mediaPlayer->play();
-    }
+    }*/
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 
