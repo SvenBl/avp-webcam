@@ -27,7 +27,6 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     ui->setupUi(this);
     videoThread->setProcessor(colorKeyerHSV);
     videoThread->openCamera(0,0);  
-    connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendCounter(int)), ui->counterLabel , SLOT(setNum(int)));
     connect(videoThread, SIGNAL(sendCounter(int)), this , SLOT(updateCalc(int)));
@@ -184,4 +183,14 @@ void VideoPlayer::on_startProgram_clicked()
 {
     timer = ui->spinBox_2->value();
     ui->remainingTimeLabel->setNum(timer);
+}
+
+void VideoPlayer::on_upperLineSpinbox_valueChanged(int arg1)
+{
+    colorKeyerHSV->upperLine = arg1;
+}
+
+void VideoPlayer::on_bottomLineSpinbox_valueChanged(int arg1)
+{
+    colorKeyerHSV->bottomLine = arg1;
 }

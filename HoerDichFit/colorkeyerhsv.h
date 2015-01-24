@@ -17,6 +17,8 @@ public:
     void setOpeningEnable(bool enable);
     void setMaskSmallRegions(bool enable);
     int pushups = 0;
+    int upperLine = 8;
+    int bottomLine = 16;
     int getPushups();
     void checkPushupCounter(cv::Mat& mat, cv::Point center);
 

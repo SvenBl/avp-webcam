@@ -147,21 +147,21 @@ void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color
 }
 
 void ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
-   if(center.y < image.rows/10*4){
+   if(center.y < image.rows/20*upperLine){
        start = true;
        if(wasDown){
            pushups = pushups + 1;
            wasDown= false;
        }
    }
-   if(start && center.y > image.rows/10*8){
+   if(start && center.y > image.rows/20*bottomLine){
        wasDown = true;
    }
 }
 
 void ColorKeyerHSV::drawLines(Mat& image, Scalar color){
-        line(image, Point(0,(image.rows/10*4) ), Point(image.cols,(image.rows/10*4)), color, 10);
-        line(image, Point(0,(image.rows/10*8) ), Point(image.cols,(image.rows/10*8)), color, 10);
+        line(image, Point(0,(image.rows/20*upperLine) ), Point(image.cols,(image.rows/20*upperLine)), color, 10);
+        line(image, Point(0,(image.rows/20*bottomLine) ), Point(image.cols,(image.rows/20*bottomLine)), color, 10);
 }
 
 void ColorKeyerHSV::setHueLowerThreshold(int value){

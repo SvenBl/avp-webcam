@@ -39,6 +39,10 @@ private slots:
 
     void on_startProgram_clicked();
 
+    void on_upperLineSpinbox_valueChanged(int arg1);
+
+    void on_bottomLineSpinbox_valueChanged(int arg1);
+
 private:
     Ui::VideoPlayer *ui;
     VideoEngine *videoThread;
