@@ -76,6 +76,7 @@ void VideoPlayer::on_open_clicked(){
         ui->listWidget->addItem(file.baseName());
     }
     ui->listWidget->setCurrentRow(mediaPlaylist->currentIndex() != -1? mediaPlaylist->currentIndex():0);
+    ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
 }
 
 void VideoPlayer::updateParameters(){
@@ -151,10 +152,10 @@ void VideoPlayer::updateCalc(int pushups)
 {
     if(timer == 0){
         mediaPlayer->play();
+        ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
     }
     timer = timer + 10;
     ui->remainingTimeLabel->setNum(timer);
-    qDebug() << timer;
 }
 
 void VideoPlayer::updatePosition(qint64 position)
@@ -171,6 +172,7 @@ void VideoPlayer::updatePosition(qint64 position)
     }
     if (timer == 0){
         mediaPlayer->pause();
+        ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     }
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
