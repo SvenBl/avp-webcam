@@ -37,13 +37,13 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>30</y>
+      <y>35</y>
       <width>141</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Insert Songs</string>
+     <string>Add Songs</string>
     </property>
    </widget>
    <widget class="QSlider" name="volume">
@@ -68,7 +68,7 @@
       <x>550</x>
       <y>40</y>
       <width>51</width>
-      <height>20</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -81,7 +81,7 @@
       <x>600</x>
       <y>40</y>
       <width>21</width>
-      <height>20</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -95,7 +95,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>35</y>
       <width>21</width>
       <height>23</height>
      </rect>
@@ -113,7 +113,7 @@
    <widget class="QPushButton" name="next">
     <property name="geometry">
      <rect>
-      <x>209</x>
+      <x>213</x>
       <y>10</y>
       <width>21</width>
       <height>23</height>
@@ -126,7 +126,7 @@
    <widget class="QPushButton" name="previous">
     <property name="geometry">
      <rect>
-      <x>141</x>
+      <x>137</x>
       <y>10</y>
       <width>21</width>
       <height>23</height>
@@ -262,7 +262,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>initial playtime</string>
+     <string>Initial playtime</string>
     </property>
    </widget>
    <widget class="QLabel" name="remainingTime">
@@ -307,7 +307,7 @@
    <widget class="QSpinBox" name="upperLineSpinbox">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>500</x>
       <y>280</y>
       <width>42</width>
       <height>22</height>
@@ -323,7 +323,7 @@
    <widget class="QSpinBox" name="bottomLineSpinbox">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>500</x>
       <y>310</y>
       <width>42</width>
       <height>22</height>
@@ -347,6 +347,32 @@
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>280</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Upper line</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>310</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bottom line</string>
     </property>
    </widget>
   </widget>
