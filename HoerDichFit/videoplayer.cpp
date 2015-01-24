@@ -199,6 +199,8 @@ void VideoPlayer::on_initialize_clicked()
         ui->initialize->setText("Initialize");
         ui->initialTimeSpinBox->setEnabled(true);
         ui->timePerPushupSpinBox->setEnabled(true);
+        ui->upperLineSpinbox->setEnabled(true);
+        ui->bottomLineSpinbox->setEnabled(true);
         initialized = false;
     }
     else{
@@ -208,6 +210,8 @@ void VideoPlayer::on_initialize_clicked()
         ui->remainingTimeLabel->setNum(timer);
         ui->initialTimeSpinBox->setEnabled(false);
         ui->timePerPushupSpinBox->setEnabled(false);
+        ui->upperLineSpinbox->setEnabled(false);
+        ui->bottomLineSpinbox->setEnabled(false);
         ui->initialize->setText("New settings");
         initialized = true;
     }
