@@ -168,6 +168,7 @@ void VideoPlayer::updatePosition(qint64 position)
     QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));
     timer = timer -1;
     qDebug() << timer;
+    ui->remainingTime->setNum(timer);
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 
