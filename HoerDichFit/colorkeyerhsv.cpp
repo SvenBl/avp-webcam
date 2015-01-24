@@ -43,13 +43,13 @@ Mat ColorKeyerHSV::process(const Mat &input){
     // convert output to 3 channel image
     Mat output;
     cvtColor(binaryMask, output, CV_GRAY2BGR);
-    drawCross(output, center, 30, Scalar(0, 255, 0));
+    drawCross(hsvFrame, center, 30, Scalar(0, 255, 0));
 
-    drawLines(output,Scalar(0,255,0));
+    drawLines(hsvFrame,Scalar(0,255,0));
 
     checkPushupCounter(output, center);
-
-    return output;
+    cvtColor(hsvFrame, hsvFrame, CV_HSV2BGR);
+    return hsvFrame;
 }
 
 int ColorKeyerHSV::getPushups(){
