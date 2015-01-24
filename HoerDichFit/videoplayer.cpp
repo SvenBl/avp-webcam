@@ -165,10 +165,18 @@ void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
 void VideoPlayer::updatePosition(qint64 position)
 {
     ui->positionSlider->setValue(position);
-    QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));
-    timer = timer -1;
-    qDebug() << timer;
-    ui->remainingTime->setNum(timer);
+    QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));   
+    //qDebug() << timer;
+    if(duration.second() > currentSecond){
+        timer = timer -1;
+        currentSecond = duration.second();
+        ui->remainingTime->setNum(timer);
+    }
+    if(duration.second() < currentSecond){
+        currentSecond = duration.second();
+        ui->remainingTime->setNum(timer);
+    }
+
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 

@@ -21,6 +21,7 @@ public:
     explicit VideoPlayer(QWidget *parent = 0);
     ~VideoPlayer();
     int timer;
+    int currentSecond = 0;
 
 private slots:
     void on_open_clicked();
