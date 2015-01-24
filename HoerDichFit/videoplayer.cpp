@@ -194,10 +194,23 @@ void VideoPlayer::setPosition(qint64 position)
 
 void VideoPlayer::on_initialize_clicked()
 {
-    doCount = true;
-    timer = ui->initialTimeSpinBox->value();
-    timePerPushup = ui->timePerPushupSpinBox->value();
-    ui->remainingTimeLabel->setNum(timer);
+    if(initialized){
+        doCount = false;
+        ui->initialize->setText("Initialize");
+        ui->initialTimeSpinBox->setEnabled(true);
+        ui->timePerPushupSpinBox->setEnabled(true);
+        initialized = false;
+    }
+    else{
+        doCount = true;
+        timer = ui->initialTimeSpinBox->value();
+        timePerPushup = ui->timePerPushupSpinBox->value();
+        ui->remainingTimeLabel->setNum(timer);
+        ui->initialTimeSpinBox->setEnabled(false);
+        ui->timePerPushupSpinBox->setEnabled(false);
+        ui->initialize->setText("New settings");
+        initialized = true;
+    }
 
 }
 

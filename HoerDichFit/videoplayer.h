@@ -25,6 +25,7 @@ public:
     int newPushups = 0;
     int timePerPushup = 10;
     bool doCount = false;
+    bool initialized = false;
 
 
 private slots:
