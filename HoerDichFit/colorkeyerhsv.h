@@ -16,7 +16,7 @@ public:
     void setMedianEnable(bool enable);
     void setOpeningEnable(bool enable);
     void setMaskSmallRegions(bool enable);
-    int pushups = 0;
+    int pushups = -1;
     int upperLine = 8;
     int bottomLine = 16;
     int getPushups();

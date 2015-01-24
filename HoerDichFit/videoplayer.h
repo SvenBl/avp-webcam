@@ -22,9 +22,12 @@ public:
     ~VideoPlayer();
     int timer;
     int currentSecond = 0;
-    int oldPushups = 0;
+    int newPushups = 0;
+    bool doCount = false;
+
 
 private slots:
+    void updateCounter(int pushups);
     void updateCalc(int pushups);
     void on_open_clicked();
     void on_start_toggled(bool checked);
@@ -37,7 +40,7 @@ private slots:
     void updatePosition(qint64 position);
     void setPosition(qint64 position);
 
-    void on_startProgram_clicked();
+    void on_initialize_clicked();
 
     void on_upperLineSpinbox_valueChanged(int arg1);
 

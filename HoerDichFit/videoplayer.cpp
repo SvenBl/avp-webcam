@@ -28,7 +28,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     videoThread->setProcessor(colorKeyerHSV);
     videoThread->openCamera(0,0);  
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
-    connect(videoThread, SIGNAL(sendCounter(int)), ui->counterLabel , SLOT(setNum(int)));
+    connect(videoThread, SIGNAL(sendCounter(int)), this , SLOT(updateCounter(int)));
     connect(videoThread, SIGNAL(sendCounter(int)), this , SLOT(updateCalc(int)));
 
     updateParameters();
@@ -150,12 +150,22 @@ void VideoPlayer::on_muteButton_toggled(bool checked)
 
 void VideoPlayer::updateCalc(int pushups)
 {
-    if(timer == 0){
-        mediaPlayer->play();
-        ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+    if(doCount){
+        if(timer == 0){
+            mediaPlayer->play();
+            ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+        }
+        timer = timer + 10;
+        ui->remainingTimeLabel->setNum(timer);
     }
-    timer = timer + 10;
-    ui->remainingTimeLabel->setNum(timer);
+}
+
+void VideoPlayer::updateCounter(int pushups)
+{
+    if(doCount){
+        newPushups = newPushups +1;
+        ui->counterLabel->setNum(newPushups);
+    }
 }
 
 void VideoPlayer::updatePosition(qint64 position)
@@ -182,10 +192,12 @@ void VideoPlayer::setPosition(qint64 position)
     mediaPlayer->setPosition(position);
 }
 
-void VideoPlayer::on_startProgram_clicked()
+void VideoPlayer::on_initialize_clicked()
 {
+    doCount = true;
     timer = ui->spinBox_2->value();
     ui->remainingTimeLabel->setNum(timer);
+
 }
 
 void VideoPlayer::on_upperLineSpinbox_valueChanged(int arg1)

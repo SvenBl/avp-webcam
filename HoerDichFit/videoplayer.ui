@@ -98,7 +98,7 @@
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>0</string>
     </property>
    </widget>
    <widget class="QPushButton" name="muteButton">
@@ -291,7 +291,7 @@
      <string>Remaining Time:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="startProgram">
+   <widget class="QPushButton" name="initialize">
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -301,7 +301,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Start</string>
+     <string>Initialize</string>
     </property>
    </widget>
    <widget class="QLabel" name="remainingTimeLabel">
@@ -314,7 +314,7 @@
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>0</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="upperLineSpinbox">
