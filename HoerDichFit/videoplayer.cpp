@@ -53,11 +53,13 @@ void VideoPlayer::on_start_toggled(bool checked){
         if(!mediaPlaylist->isEmpty()){
             mediaPlayer->play();
             ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+            doCount = true;
         }else {
             on_open_clicked();
         }
     }else {
         mediaPlayer->pause();
+        doCount = false;
         ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     }
 }
@@ -112,6 +114,7 @@ void VideoPlayer::updateParameters(){
 }
 
 void VideoPlayer::on_stop_clicked(){
+    doCount = false;
     mediaPlayer->stop();
 }
 
@@ -202,8 +205,7 @@ void VideoPlayer::on_initialize_clicked()
         ui->bottomLineSpinbox->setEnabled(true);
         initialized = false;
     }
-    else{
-        doCount = true;
+    else{        
         timer = ui->initialTimeSpinBox->value();
         timePerPushup = ui->timePerPushupSpinBox->value();
         ui->remainingTimeLabel->setNum(timer);
