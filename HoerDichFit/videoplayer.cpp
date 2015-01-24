@@ -189,4 +189,5 @@ void VideoPlayer::setPosition(qint64 position)
 void VideoPlayer::on_startProgram_clicked()
 {
     timer = ui->spinBox_2->value();
+    ui->remainingTimeLabel->setNum(timer);
 }
