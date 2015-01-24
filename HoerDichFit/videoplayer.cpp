@@ -39,9 +39,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     ui->previous->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
     ui->toggleCameraButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
-    connect(ui->positionSlider, SIGNAL(valueChanged(int)), this, SLOT(setPosition(int)));
     connect(mediaPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(updatePosition(qint64)));
-    connect(mediaPlayer, SIGNAL(durationChanged(qint64)), this, SLOT(updateDuration(qint64)));
 
 }
 
@@ -164,7 +162,6 @@ void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
 
 void VideoPlayer::updatePosition(qint64 position)
 {
-    ui->positionSlider->setValue(position);
     QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));   
     //qDebug() << timer;
     if(duration.second() > currentSecond){
@@ -180,21 +177,9 @@ void VideoPlayer::updatePosition(qint64 position)
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 
-void VideoPlayer::updateDuration(qint64 duration)
-{
-    ui->positionSlider->setRange(0, duration);
-    ui->positionSlider->setEnabled(duration > 0);
-    ui->positionSlider->setPageStep(duration / 10);
-}
-
 void VideoPlayer::setPosition(qint64 position)
 {
     mediaPlayer->setPosition(position);
-}
-
-void VideoPlayer::on_positionSlider_valueChanged(int value)
-{
-    setPosition(value);
 }
 
 void VideoPlayer::on_startProgram_clicked()
