@@ -194,7 +194,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
+   <widget class="QSpinBox" name="timePerPushupSpinBox">
     <property name="geometry">
      <rect>
       <x>520</x>
@@ -249,7 +249,7 @@
      <string>in seconds</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_2">
+   <widget class="QSpinBox" name="initialTimeSpinBox">
     <property name="geometry">
      <rect>
       <x>520</x>

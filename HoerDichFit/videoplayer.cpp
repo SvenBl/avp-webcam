@@ -155,7 +155,7 @@ void VideoPlayer::updateCalc(int pushups)
             mediaPlayer->play();
             ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
         }
-        timer = timer + 10;
+        timer = timer + timePerPushup;
         ui->remainingTimeLabel->setNum(timer);
     }
 }
@@ -195,7 +195,8 @@ void VideoPlayer::setPosition(qint64 position)
 void VideoPlayer::on_initialize_clicked()
 {
     doCount = true;
-    timer = ui->spinBox_2->value();
+    timer = ui->initialTimeSpinBox->value();
+    timePerPushup = ui->timePerPushupSpinBox->value();
     ui->remainingTimeLabel->setNum(timer);
 
 }

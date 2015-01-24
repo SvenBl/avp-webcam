@@ -23,6 +23,7 @@ public:
     int timer;
     int currentSecond = 0;
     int newPushups = 0;
+    int timePerPushup = 10;
     bool doCount = false;
 
 
