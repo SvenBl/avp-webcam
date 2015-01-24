@@ -30,6 +30,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendCounter(int)), ui->counterLabel , SLOT(setNum(int)));
+    connect(videoThread, SIGNAL(sendCounter(int)), this , SLOT(updateCalc(int)));
     updateParameters();
 
     ui->open->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
@@ -160,10 +161,15 @@ void VideoPlayer::on_toggleCameraButton_toggled(bool checked)
     }
 }
 
+void VideoPlayer::updateCalc(int pushups)
+{
+    timer = timer + 10;
+    qDebug() << "test";
+}
+
 void VideoPlayer::updatePosition(qint64 position)
 {
     QTime duration(0, position / 60000, qRound((position % 60000) / 1000.0));   
-    //qDebug() << timer;
     if(duration.second() > currentSecond){
         timer = timer -1;
         currentSecond = duration.second();

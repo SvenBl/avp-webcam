@@ -22,8 +22,10 @@ public:
     ~VideoPlayer();
     int timer;
     int currentSecond = 0;
+    int oldPushups = 0;
 
 private slots:
+    void updateCalc(int pushups);
     void on_open_clicked();
     void on_start_toggled(bool checked);
     void updateParameters();
