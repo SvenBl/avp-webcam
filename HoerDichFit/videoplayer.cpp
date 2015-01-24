@@ -80,7 +80,7 @@ void VideoPlayer::on_open_clicked(){
 
 void VideoPlayer::updateParameters(){
     // hue thresholds
-    int hueValue = ui->hueSlider->value();
+    int hueValue = 0;
     int hueTolerance = 30;
     int hueLowerThreshold = hueValue - hueTolerance;
     if (hueLowerThreshold < 0){
@@ -92,7 +92,6 @@ void VideoPlayer::updateParameters(){
     }
     colorKeyerHSV->setHueLowerThreshold(hueLowerThreshold);
     colorKeyerHSV->setHueUpperThreshold(hueUpperThreshold);
-    ui->labelHue->setNum(hueValue);
 
     // saturation thresholds
     int saturationThreshold = 207;
