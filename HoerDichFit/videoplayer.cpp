@@ -150,7 +150,11 @@ void VideoPlayer::on_muteButton_toggled(bool checked)
 
 void VideoPlayer::updateCalc(int pushups)
 {
+    if(timer == 0){
+        mediaPlayer->play();
+    }
     timer = timer + 10;
+    ui->remainingTimeLabel->setNum(timer);
     qDebug() << timer;
 }
 
@@ -166,11 +170,9 @@ void VideoPlayer::updatePosition(qint64 position)
         currentSecond = duration.second();
         ui->remainingTimeLabel->setNum(timer);
     }
-    /*if (timer < 1){
+    if (timer == 0){
         mediaPlayer->pause();
-    }else {
-        mediaPlayer->play();
-    }*/
+    }
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 
