@@ -104,13 +104,13 @@ void VideoPlayer::updateParameters(){
     colorKeyerHSV->setAlpha(alpha/100.f);
 
     // median
-    colorKeyerHSV->setMedianEnable(ui->checkBoxMedian->checkState() == Qt::Checked);
+    colorKeyerHSV->setMedianEnable(false);
 
     // opening
-    colorKeyerHSV->setOpeningEnable(ui->checkBoxOpening->checkState() == Qt::Checked);
+    colorKeyerHSV->setOpeningEnable(false);
 
     // small regions masking
-    colorKeyerHSV->setMaskSmallRegions(ui->checkBoSxSmallRegions->checkState() == Qt::Checked);
+    colorKeyerHSV->setMaskSmallRegions(true);
 }
 
 void VideoPlayer::on_stop_clicked(){
