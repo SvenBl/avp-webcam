@@ -35,7 +35,6 @@ VideoPlayer::VideoPlayer(QWidget *parent)
 
     ui->open->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
     ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    ui->stop->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     ui->next->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
     ui->previous->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
     ui->muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
