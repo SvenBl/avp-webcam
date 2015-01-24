@@ -167,13 +167,17 @@ void VideoPlayer::updatePosition(qint64 position)
     if(duration.second() > currentSecond){
         timer = timer -1;
         currentSecond = duration.second();
-        ui->remainingTime->setNum(timer);
+        ui->remainingTimeLabel->setNum(timer);
     }
     if(duration.second() < currentSecond){
         currentSecond = duration.second();
-        ui->remainingTime->setNum(timer);
+        ui->remainingTimeLabel->setNum(timer);
     }
-
+    if (timer < 1){
+        mediaPlayer->pause();
+    }else {
+        mediaPlayer->play();
+    }
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
 }
 
