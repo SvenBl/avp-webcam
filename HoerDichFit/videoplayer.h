@@ -39,7 +39,6 @@ private slots:
     void on_volume_valueChanged(int value);
     void on_muteButton_toggled(bool checked);
     void updatePosition(qint64 position);
-    void setPosition(qint64 position);
 
     void on_initialize_clicked();
 

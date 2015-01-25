@@ -54,6 +54,7 @@ VideoPlayer::~VideoPlayer(){
 }
 
 void VideoPlayer::on_start_toggled(bool checked){
+    //Start-stop funktion
     if (ui->start->isChecked()) {
         if(!mediaPlaylist->isEmpty()){
             mediaPlayer->play();
@@ -85,7 +86,7 @@ void VideoPlayer::on_open_clicked(){
 }
 
 void VideoPlayer::updateParameters(){
-    // hue thresholds
+    // Hue thresholds
     int hueValue = 0;
     int hueTolerance = 30;
     int hueLowerThreshold = hueValue - hueTolerance;
@@ -128,10 +129,12 @@ void VideoPlayer::on_volume_valueChanged(int value){
 }
 
 void VideoPlayer::on_next_clicked(){
+    //vorheriger Song aus der Playlist
     mediaPlaylist->next();
 }
 
 void VideoPlayer::on_previous_clicked(){
+    //nächster Song aus der Playlist
     mediaPlaylist->previous();
 }
 
@@ -162,6 +165,7 @@ void VideoPlayer::updateCalc(int pushups){
 }
 
 void VideoPlayer::updateCounter(int pushups){
+    //Update des Counters auf dem GUI
     if(doCount){
         newPushups = newPushups +1;
         ui->counterLabel->setNum(newPushups);
@@ -185,10 +189,6 @@ void VideoPlayer::updatePosition(qint64 position){
         ui->start->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     }
     ui->positionLabel->setText(duration.toString(tr("mm:ss")));
-}
-
-void VideoPlayer::setPosition(qint64 position){
-    mediaPlayer->setPosition(position);
 }
 
 void VideoPlayer::on_initialize_clicked(){
@@ -217,9 +217,11 @@ void VideoPlayer::on_initialize_clicked(){
 }
 
 void VideoPlayer::on_upperLineSpinbox_valueChanged(int arg1){
+    //obere Linie verschieben
     colorKeyerHSV->upperLine = arg1;
 }
 
 void VideoPlayer::on_bottomLineSpinbox_valueChanged(int arg1){
+    //untere Linie verschieben
     colorKeyerHSV->bottomLine = arg1;
 }

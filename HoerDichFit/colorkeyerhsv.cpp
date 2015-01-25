@@ -23,15 +23,7 @@ Mat ColorKeyerHSV::process(const Mat &input){
     // output: 1 channel image
     Mat binaryMask = colorKeying(hsvFrame);
 
-    if (useMedian){
-        medianBlur(binaryMask, binaryMask, 5);
-    }
-
-    if (useOpening){
-        erode(binaryMask, binaryMask, Mat());
-        dilate(binaryMask, binaryMask, Mat());
-    }
-
+    //use smallRegions
     if (useMaskSmallRegions){
         binaryMask = maskSmallRegions(binaryMask);
     }
@@ -42,12 +34,17 @@ Mat ColorKeyerHSV::process(const Mat &input){
     // convert output to 3 channel image
     Mat output;
     cvtColor(binaryMask, output, CV_GRAY2BGR);
-    drawCross(hsvFrame, center, 30, Scalar(0, 255, 0));
 
+    //draw Lines and Cross
+    drawCross(hsvFrame, center, 30, Scalar(0, 255, 0));
     drawLines(hsvFrame,Scalar(0,255,0));
 
+    //update Pushups
     checkPushupCounter(output, center);
+
+    //hsvFrame to HSV again
     cvtColor(hsvFrame, hsvFrame, CV_HSV2BGR);
+
     return hsvFrame;
 }
 
@@ -119,6 +116,7 @@ cv::Mat ColorKeyerHSV::maskSmallRegions(cv::Mat& mask){
 }
 
 void ColorKeyerHSV::centerOfMass(Mat& image){
+    //calculate center
     int sumx = 0;
     int sumy = 0;
     int count = 0;
@@ -138,6 +136,7 @@ void ColorKeyerHSV::centerOfMass(Mat& image){
 }
 
 void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color){
+    //draw a cross
     if(center.x > 0 && center.y > 0){
         line(image, center-Point(0, length), center+Point(0,length), color, 10);
         line(image, center-Point(length, 0), center+Point(length, 0), color, 10);
@@ -145,6 +144,7 @@ void ColorKeyerHSV::drawCross(Mat& image, Point center, int length, Scalar color
 }
 
 void ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
+   //counts pushups
    if(center.y < image.rows/20*upperLine){
        start = true;
        if(wasDown){
@@ -158,6 +158,7 @@ void ColorKeyerHSV::checkPushupCounter(Mat& image, Point center){
 }
 
 void ColorKeyerHSV::drawLines(Mat& image, Scalar color){
+        //set the pushup borders
         line(image, Point(0,(image.rows/20*upperLine) ), Point(image.cols,(image.rows/20*upperLine)), color, 10);
         line(image, Point(0,(image.rows/20*bottomLine) ), Point(image.cols,(image.rows/20*bottomLine)), color, 10);
 }
