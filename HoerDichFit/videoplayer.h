@@ -34,7 +34,6 @@ private slots:
     void on_open_clicked();
     void on_start_toggled(bool checked);
     void updateParameters();
-    void on_stop_clicked();
     void on_next_clicked();
     void on_previous_clicked();
     void on_volume_valueChanged(int value);

@@ -117,11 +117,6 @@ void VideoPlayer::updateParameters(){
     colorKeyerHSV->setMaskSmallRegions(true);
 }
 
-void VideoPlayer::on_stop_clicked(){
-    doCount = false;
-    mediaPlayer->stop();
-}
-
 void VideoPlayer::on_volume_valueChanged(int value){
     // Handling des Lautstärke-Reglers
     mediaPlayer->setVolume(value);
