@@ -36,7 +36,6 @@ Mat ColorKeyerHSV::process(const Mat &input){
         binaryMask = maskSmallRegions(binaryMask);
     }
 
-
     // calculate center of mass
     centerOfMass(binaryMask);
 
@@ -80,10 +79,9 @@ Mat ColorKeyerHSV::colorKeying(Mat& hsvFrame){
                     }
                 }
             }
-            if (isWhite){
+            if (isWhite) {
                 output.at<uchar>(y,x) = 255;
-            }
-            else{
+            } else {
                 output.at<uchar>(y,x) = 0;
             }
         }
@@ -167,12 +165,15 @@ void ColorKeyerHSV::drawLines(Mat& image, Scalar color){
 void ColorKeyerHSV::setHueLowerThreshold(int value){
     hueLowerThreshold = value/2;
 }
+
 void ColorKeyerHSV::setHueUpperThreshold(int value){
     hueUpperThreshold = value/2;
 }
+
 void ColorKeyerHSV::setSaturationThreshold(int value){
     saturationThreshold = value/2;
 }
+
 void ColorKeyerHSV::setAlpha(float alpha){
     this->alpha = alpha;
 }
